@@ -63,9 +63,11 @@ all: $(NAME) $(OBJS)
 
 $(NAME): $(OBJS)
 
-$(OBJS): %.o: %.c $(HEADERS)
+
+
+%.o: %.c $(HEADERS)
 	$(CC) $< -o $@ -c 
-	ar rcs $(NAME) $< 
+	ar rcs $(NAME) $@ 
 	
 clean: 
 	rm -f $(OBJS) $(OBJS_BONUS)
@@ -77,10 +79,8 @@ re: fclean all
 
 bonus: $(OBJS_BONUS)
 
-
-$(OBJS_BONUS): %.o: %.c $(HEADERS)
-	$(CC) $< -o $@ -c 
-	ar rcs $(NAME) $<
-
-
 .PHONY: all re clean fclean 
+
+so:
+	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC)
+	gcc -nostartfiles -shared -o libft.so $(OBJ)
