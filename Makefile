@@ -1,6 +1,9 @@
 NAME = libft.a
 
+HEADERS = libft.h
+
 CC = gcc -Wall -Wextra -Werror 
+
 SRCS = ft_isalpha.c \
 	ft_isdigit.c \
 	ft_isalnum.c \
@@ -34,7 +37,7 @@ SRCS = ft_isalpha.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
-	ft_putnbr_fd.c \
+	ft_putnbr_fd.c 
 
 BONUS = ft_lstnew.c \
 			ft_lstadd_front.c \
@@ -46,19 +49,23 @@ BONUS = ft_lstnew.c \
 			ft_lstiter.c \
 			ft_lstmap.c
 
-OBJS = $(foreach src,$(SRCS),$(src:.c=.o))
+OBJS = $(SRCS:.c=.o)
 
-HEADERS = libft.h
+OBJS_BONUS = $(BONUS:.c=.o)
 
-OBJS_BONUS = $(foreach src,$(BONUS),$(src:.c=.o))
+all: $(NAME) $(OBJS)
 
-all: $(NAME)
+# $(NAME): $(OBJS)
+# 	ar rcs $(NAME) $(OBJS) 
+
+# $(OBJS): $(SRCS)
+# 	$(CC) $(SRCS) -c -I $(HEADERS)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS) 
 
-$(OBJS): $(SRCS)
-	$(CC) $(SRCS) -c -I $(HEADERS)
+$(OBJS): %.o: %.c $(HEADERS)
+	$(CC) $< -o $@ -c 
+	ar rcs $(NAME) $< 
 	
 clean: 
 	rm -f $(OBJS) $(OBJS_BONUS)
@@ -68,10 +75,12 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(NAME) $(OBJS_BONUS)
+bonus: $(OBJS_BONUS)
 
-$(OBJS_BONUS): $(BONUS)
-	$(CC) $(BONUS) -c -I $(HEADERS)
-	ar rcs $(NAME) $(OBJS_BONUS)
+
+$(OBJS_BONUS): %.o: %.c $(HEADERS)
+	$(CC) $< -o $@ -c 
+	ar rcs $(NAME) $<
+
 
 .PHONY: all re clean fclean 

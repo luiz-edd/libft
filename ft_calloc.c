@@ -6,7 +6,7 @@
 /*   By: leduard2 <leduard2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:51:58 by leduard2          #+#    #+#             */
-/*   Updated: 2023/08/03 17:47:20 by leduard2         ###   ########.fr       */
+/*   Updated: 2023/08/03 20:28:03 by leduard2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		nmemb = 1;
 		size = 1;
 	}
-	// if ((nmemb * size) > 2147483647)
-	// 	return (NULL);
 	p = (void *)malloc(nmemb * size);
 	if (p == NULL)
 		return (NULL);
