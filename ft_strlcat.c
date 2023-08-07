@@ -6,7 +6,7 @@
 /*   By: leduard2 <leduard2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:11:53 by leduard2          #+#    #+#             */
-/*   Updated: 2023/07/25 14:35:55 by leduard2         ###   ########.fr       */
+/*   Updated: 2023/08/07 20:32:21 by leduard2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	i;
 	size_t	j;
 
-	srclen = ft_strlen((char *)src);
-	dstlen = ft_strlen((char *)dst);
+	srclen = ft_strlen(src);
+	dstlen = ft_strlen(dst);
 	i = dstlen;
 	j = 0;
 	if (size > dstlen)

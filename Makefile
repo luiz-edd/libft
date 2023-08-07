@@ -53,7 +53,9 @@ OBJS = $(SRCS:.c=.o)
 
 OBJS_BONUS = $(BONUS:.c=.o)
 
-all: $(NAME) $(OBJS)
+all: $(NAME)
+
+bonus: $(OBJS_BONUS)
 
 $(NAME): $(OBJS)
 
@@ -68,7 +70,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-bonus: $(OBJS_BONUS)
 
 .PHONY: all re clean fclean 
