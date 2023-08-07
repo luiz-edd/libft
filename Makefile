@@ -55,15 +55,7 @@ OBJS_BONUS = $(BONUS:.c=.o)
 
 all: $(NAME) $(OBJS)
 
-# $(NAME): $(OBJS)
-# 	ar rcs $(NAME) $(OBJS) 
-
-# $(OBJS): $(SRCS)
-# 	$(CC) $(SRCS) -c -I $(HEADERS)
-
 $(NAME): $(OBJS)
-
-
 
 %.o: %.c $(HEADERS)
 	$(CC) $< -o $@ -c 
@@ -80,7 +72,3 @@ re: fclean all
 bonus: $(OBJS_BONUS)
 
 .PHONY: all re clean fclean 
-
-so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC)
-	gcc -nostartfiles -shared -o libft.so $(OBJ)
