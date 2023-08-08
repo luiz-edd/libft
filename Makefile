@@ -2,7 +2,7 @@ NAME = libft.a
 
 HEADERS = libft.h
 
-CC = gcc -Wall -Wextra -Werror 
+CC = cc -Wall -Wextra -Werror 
 
 SRCS = ft_isalpha.c \
 	ft_isdigit.c \
@@ -71,4 +71,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all re clean fclean 
+.PHONY: all re clean fclean

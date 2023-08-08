@@ -6,7 +6,7 @@
 /*   By: leduard2 <leduard2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:51:58 by leduard2          #+#    #+#             */
-/*   Updated: 2023/08/03 20:28:03 by leduard2         ###   ########.fr       */
+/*   Updated: 2023/08/08 12:50:13 by leduard2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,16 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*p;
-	size_t	max_int;
+	void	*alloc;
+	size_t	total_size;
 
-	max_int = -1;
-	if (size != 0 && nmemb > max_int / size)
-		return (NULL);
 	if (nmemb == 0 || size == 0)
-	{
-		nmemb = 1;
-		size = 1;
-	}
-	p = (void *)malloc(nmemb * size);
-	if (p == NULL)
+		return (malloc(0));
+	total_size = (nmemb * size);
+	if ((total_size > 2147483647) || (total_size / nmemb != size))
 		return (NULL);
-	ft_bzero(p, (nmemb * size));
-	return (p);
+	alloc = malloc(total_size);
+	if (alloc != NULL)
+		ft_bzero(alloc, total_size);
+	return (alloc);
 }
