@@ -1,10 +1,24 @@
 NAME = libft.a
-
-HEADERS = libft.h
-
+HEADERS = src/
 CC = cc -Wall -Wextra -Werror 
 
-SRCS = ft_isalpha.c \
+PATH_TO_SRC = src/
+PATH_TO_OBJ = obj/
+
+PRINTF = ft_eval_format.c \
+	ft_print_char.c \
+	ft_print_digit.c \
+	ft_print_ex_up.c \
+	ft_print_ex.c \
+	ft_print_pointer.c \
+	ft_print_str.c \
+	ft_print_unsigned.c \
+	ft_printf.c \
+	ft_print_utils.c \
+
+GNL = get_next_line.c
+
+SRC = ft_isalpha.c \
 	ft_isdigit.c \
 	ft_isalnum.c \
 	ft_isascii.c \
@@ -37,34 +51,42 @@ SRCS = ft_isalpha.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
-	ft_putnbr_fd.c 
+	ft_putnbr_fd.c \
+	ft_wordcount.c \
+	ft_lstadd_back.c \
+	ft_lstadd_front.c \
+	ft_lstclear.c \
+	ft_lstdelone.c \
+	ft_lstiter.c \
+	ft_lstlast.c \
+	ft_lstlast.c \
+	ft_lstmap.c \
+	ft_lstnew.c \
+	ft_atoi_base.c \
+	ft_maxval.c \
+	ft_lstsize.c \
+	ft_freepp.c \
+	ft_absolute.c \
+	ft_print_words.c \
+	$(PRINTF) \
+	$(GNL) \
 
-BONUS = ft_lstnew.c \
-			ft_lstadd_front.c \
-			ft_lstsize.c \
-			ft_lstlast.c \
-			ft_lstadd_back.c \
-			ft_lstdelone.c \
-			ft_lstclear.c \
-			ft_lstiter.c \
-			ft_lstmap.c
+OBJ = $(SRC:.c=.o)
 
-OBJS = $(SRCS:.c=.o)
-
-OBJS_BONUS = $(BONUS:.c=.o)
+SRC_PATH = $(addprefix $(PATH_TO_SRC), $(SRC))
+OBJ_PATH = $(addprefix $(PATH_TO_OBJ), $(OBJ))
 
 all: $(NAME)
 
-bonus: $(OBJS_BONUS)
+$(NAME): $(OBJ_PATH)
 
-$(NAME): $(OBJS)
-
-%.o: %.c $(HEADERS)
+$(PATH_TO_OBJ)%.o: $(PATH_TO_SRC)%.c $(HEADERS)
+	@mkdir -p obj
 	$(CC) $< -o $@ -c 
-	ar rcs $(NAME) $@ 
+	@ar rcs $(NAME) $@ 
 	
 clean: 
-	rm -f $(OBJS) $(OBJS_BONUS)
+	@rm -rf obj
 
 fclean: clean
 	rm -f $(NAME)
