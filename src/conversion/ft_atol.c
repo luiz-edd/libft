@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_words.c                                   :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leduard2 <leduard2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 11:16:40 by leduard2          #+#    #+#             */
-/*   Updated: 2023/12/04 11:24:06 by leduard2         ###   ########.fr       */
+/*   Created: 2024/01/29 14:13:59 by leduard2          #+#    #+#             */
+/*   Updated: 2024/01/29 14:18:58 by leduard2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_print_words(char **str)
+long	ft_atol(char *str)
 {
-	int i;
+	char	*c;
+	int		i;
+	int		sign;
+	long	sum;
+
 	i = 0;
-	ft_printf("{");
-	while (str[i])
+	sign = 1;
+	c = str;
+	sum = 0;
+	while ((c[i] >= '\t' && c[i] <= '\r') || c[i] == ' ')
+		i++;
+	if (c[i] == '-')
 	{
-		ft_printf("%s, ", str[i]);
+		sign *= -1;
 		i++;
 	}
-	ft_printf("}\n");
+	else if (c[i] == '+')
+		i++;
+	while (ft_isdigit(c[i]))
+	{
+		sum = (sum * 10) + (c[i] - '0');
+		i++;
+	}
+	return (sum * sign);
 }
